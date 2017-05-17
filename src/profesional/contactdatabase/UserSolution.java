@@ -289,21 +289,36 @@ public class UserSolution {
         return length;
     }
 
+    public static int[] copyIndex(ArrayList<Integer> listDatabaseIndex) {
+        if(listDatabaseIndex == null || listDatabaseIndex.size() == 0) return null;
+        int[] result = new int[listDatabaseIndex.size()];
+        for(int i=0; i<listDatabaseIndex.size(); i++) {
+            result[i] = listDatabaseIndex.get(i);
+        }
+        return result;
+    }
+
     public static int Change(int field, char[] str, int changefield, char[] changestr) {
         System.out.println("3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
 
-        ArrayList<Integer> listDatabaseIndex = getListDatabaseIndex(field, new String(str));
+        String key = new String(str);
+        String newValue = new String(changestr);
 
-        int length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
+        ArrayList<Integer> listIdx = getListDatabaseIndex(field, key);
+        // di copy dulu indexnya, somehow kalo pake arraylist kalo di remove ikut ke remove juga
+        int[] idxList = copyIndex(listIdx);
+
+        int length = idxList == null ? 0 : idxList.length;
         for(int i=0; i < length; i++) {
-            int index = listDatabaseIndex.get(i);
+            int index = idxList[i];
             Record record = database.get(index);
 
             // remove old key from map
             removeIndexFromMap(changefield, record, index);
 
             // change record with new value
-            record.changeValue(changefield, new String(changestr));
+            database.get(index).changeValue(changefield, newValue);
+            record.changeValue(changefield, newValue);
 
             // add new str to key map
             addValueToMap(changefield, record, index);
