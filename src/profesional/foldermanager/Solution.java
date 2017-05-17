@@ -1,4 +1,4 @@
-package profesional.virusinfection;
+package profesional.foldermanager;
 
 import java.util.Scanner;
 
