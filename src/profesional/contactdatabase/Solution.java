@@ -23,7 +23,8 @@ public class Solution {
     static char[][] lastname = { "kim".toCharArray(), "lee".toCharArray(), "park".toCharArray(), "choi".toCharArray(), "jung".toCharArray(), "kang".toCharArray(), "cho".toCharArray(), "oh".toCharArray(), "jang".toCharArray(), "lim".toCharArray() };
     static int[] lastname_length = { 3, 3, 4, 4, 4, 4, 3, 2, 4, 3 };
 
-    static UserSolution userSolution = new UserSolution();
+//    static UserSolution userSolution = new UserSolution();
+    static UserSolutionUsingVector userSolution = new UserSolutionUsingVector();
 
     public static class RESULT
     {
