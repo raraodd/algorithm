@@ -484,7 +484,6 @@ public class Solution {
     }
 
     public static int Change(int field, char[] str, int changefield, char[] changestr) {
-
         String key = new String(str);
         String newValue = new String(changestr);
 

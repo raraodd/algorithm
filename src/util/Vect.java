@@ -8,7 +8,7 @@ public class Vect<Item> {
     private Item items[];
     private int size;
     private int temp_size;
-    private int SIZE_VECTOR = 1000;
+    private int SIZE_VECTOR = 100000;
     private int index = 0;
 
     public Vect() {

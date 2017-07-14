@@ -12,6 +12,8 @@ public class UserSolutionUsingVector {
 
     public static HashMap<Integer, Record> database;
     public static HashMap<String, Vect<Integer>> mapName, mapBirthday, mapMemo, mapNumber, mapEmail;
+
+
     public static Integer count = 0;
 
     public static class Field {
@@ -23,7 +25,7 @@ public class UserSolutionUsingVector {
     }
 
     static class Record {
-        public Integer id;
+        public int id;
         public String name, number, birthday, email, memo;
 
         @Override
@@ -65,7 +67,6 @@ public class UserSolutionUsingVector {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public static String subArray(char[] chr) {
         String result = "";
         int len = chr.length;
@@ -74,7 +75,6 @@ public class UserSolutionUsingVector {
             result += chr[i];
 
         }
-//        System.out.println("Subarray " + result + " " + result.length());
         return result;
     }
 
@@ -258,11 +258,11 @@ public class UserSolutionUsingVector {
 
         // save key to all map
         int index = record.id;
-        addValueToMap(Field.name, record, index);
-        addValueToMap(Field.birthday, record, index);
-        addValueToMap(Field.memo, record, index);
-        addValueToMap(Field.number, record, index);
-        addValueToMap(Field.email, record, index);
+//        addValueToMap(Field.name, record, index);
+//        addValueToMap(Field.birthday, record, index);
+//        addValueToMap(Field.memo, record, index);
+//        addValueToMap(Field.number, record, index);
+//        addValueToMap(Field.email, record, index);
     }
 
     public static int Delete(int field, char[] str) {

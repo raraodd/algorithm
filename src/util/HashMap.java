@@ -51,6 +51,7 @@ public class HashMap<Key, Value> {
 
     public void put(Key key, Value value) {
         int hash = (key.hashCode() & 0x7fffffff) % currentSize;
+        System.out.println("Key: " + key + " " + hash);
         if(count >= this.currentSize) {
             while (this.table[hash] != null) {
                 rehash();
