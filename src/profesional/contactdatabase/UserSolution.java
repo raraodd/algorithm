@@ -1,8 +1,8 @@
 package profesional.contactdatabase;
 
 import java.util.ArrayList;
-//import java.util.HashMap;
-import util.HashMap;
+import java.util.HashMap;
+//import util.HashMap;
 
 /**
  * Created by Wendy P on 5/17/17.

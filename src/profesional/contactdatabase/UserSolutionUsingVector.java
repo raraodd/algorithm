@@ -1,8 +1,8 @@
 package profesional.contactdatabase;
 
-//import java.util.Vect;
-//import java.util.HashMap;
-import util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import util.Vect;
 
 /**
  * Created by Wendy P on 5/17/17.
@@ -12,7 +12,6 @@ public class UserSolutionUsingVector {
 
     public static HashMap<Integer, Record> database;
     public static HashMap<String, Vect<Integer>> mapName, mapBirthday, mapMemo, mapNumber, mapEmail;
-
 
     public static Integer count = 0;
 
@@ -224,10 +223,7 @@ public class UserSolutionUsingVector {
 
 
     public static void InitDB() {
-        System.out.println("0 Init");
-        count = 0;
-
-        // init database Hashmap
+        // init database arrayList
         database = new HashMap<>();
 
         // init map name, birthday, memo, number, email
@@ -251,22 +247,22 @@ public class UserSolutionUsingVector {
         record.memo = subArray(memo2);
         count++;
 
-        System.out.println("1 Add " + record.toString());
+//        System.out.println("1 Add " + record.toString());
 
         // save record to database
         database.put(record.id, record);
 
         // save key to all map
         int index = record.id;
-//        addValueToMap(Field.name, record, index);
-//        addValueToMap(Field.birthday, record, index);
-//        addValueToMap(Field.memo, record, index);
-//        addValueToMap(Field.number, record, index);
-//        addValueToMap(Field.email, record, index);
+        addValueToMap(Field.name, record, index);
+        addValueToMap(Field.birthday, record, index);
+        addValueToMap(Field.memo, record, index);
+        addValueToMap(Field.number, record, index);
+        addValueToMap(Field.email, record, index);
     }
 
     public static int Delete(int field, char[] str) {
-        System.out.println("2 Delete "+ field + " " + new String(str).toString());
+//        System.out.println("2 Delete "+ field + " " + new String(str).toString());
 
         Vect<Integer> listDatabaseIndex = getListDatabaseIndex(field, new String(str));
 
@@ -295,7 +291,7 @@ public class UserSolutionUsingVector {
     }
 
     public static int Change(int field, char[] str, int changefield, char[] changestr) {
-        System.out.println("3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
+//        System.out.println("3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
 
         String key = new String(str);
         String newValue = new String(changestr);
@@ -324,7 +320,7 @@ public class UserSolutionUsingVector {
     }
 
     public static Solution.RESULT Search(int field, char[] str, int returnfield) {
-        System.out.println("4 Search "+ field + " " + new String(str).toString() + " " + returnfield);
+//        System.out.println("4 Search "+ field + " " + new String(str).toString() + " " + returnfield);
         String key = new String(str);
         Vect<Integer> listDatabaseIndex = getListDatabaseIndex(field, key);
 

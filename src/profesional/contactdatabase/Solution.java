@@ -143,6 +143,7 @@ public class Solution {
         check  = sc.nextInt();
 
         result = userSolution.Change(field, str, changefield, changestr);
+        System.out.println("result - " + result + " " + check);
         if (result != check) {
             Score -= ScoreIdx;
         }
@@ -185,7 +186,7 @@ public class Solution {
                 case CMD_SEARCH: cmd_search(); break;
                 default: break;
             }
-            System.out.println(Score);
+//            System.out.println(Score);
         }
     }
 
