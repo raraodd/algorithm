@@ -2,8 +2,6 @@ package profesional.foldermanager;
 
 import java.util.HashMap;
 import java.util.Vector;
-
-
 /**
  * Created by SRIN on 3/2/2017.
  */
@@ -36,7 +34,6 @@ public class UserSolution {
         Record parentRecord = mapRecord.get(pid);
         parentRecord.totalSize += value;
         parentRecord.totalFile = parentRecord.totalFile + isAddFile;
-//        System.out.println("calculate - " + id + " " + pid + " " + parentRecord.totalSize + " " + parentRecord.totalFile);
         recalculateFileAndSize(pid, value, parentRecord.pid, isAddFile);
     }
 

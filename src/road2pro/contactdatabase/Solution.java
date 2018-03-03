@@ -1,6 +1,8 @@
 package road2pro.contactdatabase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Created by Wendy P on 5/17/17.

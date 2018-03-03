@@ -51,7 +51,6 @@ public class HashMap<Key, Value> {
 
     public void put(Key key, Value value) {
         int hash = (key.hashCode() & 0x7fffffff) % currentSize;
-        System.out.println("Key: " + key + " " + hash);
         if(count >= this.currentSize) {
             while (this.table[hash] != null) {
                 rehash();
@@ -60,8 +59,11 @@ public class HashMap<Key, Value> {
         }
         if(table[hash] == null) {
             count++;
+        } else {
+            System.out.println("------- collision");
         }
         table[hash] = new HashEntry<Key, Value>(key, value);
+//        System.out.println("Key: " + key + " " + hash + " " + count + " " + table.length);
     }
 
     public void remove(Key key) {
