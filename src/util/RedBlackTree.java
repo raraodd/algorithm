@@ -78,7 +78,7 @@ public class RedBlackTree<Key extends Comparable, Value> {
         root = NIL;
     }
 
-    public Node search (Key key) {
+    public Value search (Key key) {
         x = root;
 
         while (x != NIL) {
@@ -90,7 +90,7 @@ public class RedBlackTree<Key extends Comparable, Value> {
             else break;
         }
 
-        return x;
+        return x.value;
     }
 
     public int depth() {

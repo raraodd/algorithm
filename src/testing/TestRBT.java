@@ -22,7 +22,7 @@ public class TestRBT {
 //        rbt.delete_node(rbt.search(3));
 
 //        rbt.print();
-        rbt.print(rbt.search(10));
+//        rbt.print(rbt.search(10));
 //        rbt.print(rbt.search(2));
 //        rbt.print(rbt.search(3));
 //        rbt.print(rbt.search(4));
