@@ -5,18 +5,18 @@ import static java.lang.Integer.max;
 /**
  * Created by SRIN on 7/19/2017.
  */
-public class RedBlackTree<Key extends Comparable, Value> {
+public class RedBlackTree<Value> {
 
     final int RED = 1;
     final int BLACK = 2;
 
     public class Node {
-        Key key;
+        Integer key;
         Value value;
         Node left, right, parent;
         int color;
 
-        Node (Key key, Value value) {
+        Node (Integer key, Value value) {
             this.key = key;
             this.value = value;
             left = right = parent = null;
@@ -37,7 +37,7 @@ public class RedBlackTree<Key extends Comparable, Value> {
         root = NIL;
     }
 
-    public void insert(Key key, Value value) {
+    public void insert(Integer key, Value value) {
         now = new Node(key, value);
         now.left = now.right = now.parent = NIL;
 
@@ -78,13 +78,28 @@ public class RedBlackTree<Key extends Comparable, Value> {
         root = NIL;
     }
 
-    public Value search (Key key) {
+    public Node search (Integer key) {
         x = root;
 
         while (x != NIL) {
-            if (key.compareTo(x.key) < 0) {
+            if ((key - x.key) < 0) {
                 x = x.left;
-            } else if (key.compareTo(x.key) > 0) {
+            } else if ((key - x.key) > 0) {
+                x = x.right;
+            }
+            else break;
+        }
+
+        return x;
+    }
+
+    public Value get (Integer key) {
+        x = root;
+
+        while (x != NIL) {
+            if ((key - x.key) < 0) {
+                x = x.left;
+            } else if ((key - x.key) > 0) {
                 x = x.right;
             }
             else break;

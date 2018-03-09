@@ -1,6 +1,8 @@
 package hackerrank.tworeaders;
 
 
+import util.RedBlackTreeString;
+
 import java.util.Scanner;
 import static java.lang.Integer.max;
 
@@ -9,8 +11,9 @@ import static java.lang.Integer.max;
  */
 public class TwoReaders {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        System.setIn(new java.io.FileInputStream("/Users/wendy/Documents/3. Git/algorithm/src/hackerrank/tworeaders/input05.txt"));
         Scanner sc = new Scanner(System.in);
 
         long start = System.currentTimeMillis() % 1000;
@@ -18,7 +21,7 @@ public class TwoReaders {
         int N = sc.nextInt();
         int M = sc.nextInt();
 
-        RBT<String, Boolean> mapBooks = new RBT<>();
+        RedBlackTreeString<Boolean> mapBooks = new RedBlackTreeString<>();
 
         for(int i = 0; i < N; i++) {
             String book = sc.next().toLowerCase();
@@ -31,7 +34,7 @@ public class TwoReaders {
             String book = sc.next().toLowerCase();
 //            System.out.println(book + " " + mapBooks.search(book));
 
-            RBT.Node b = mapBooks.search(book);
+            RedBlackTreeString.Node b = mapBooks.search(book);
             if(b.value != null){
                 count += 1;
             }
@@ -92,6 +95,8 @@ public class TwoReaders {
                     return;
                 }
             }
+
+            System.out.println(now.key + " " + x.key);
 
             if(y == NIL) {
                 root = now;
