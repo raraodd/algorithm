@@ -33,13 +33,17 @@ public class Solution {
     static int listsize = 0;
     static int newCommand[] = {0, COPY, CUT, INSERT, PASTED, PASTED, INSERT, GETSUBSTRING};
 
+    static final String dir = System.getProperty("user.dir") + "/src/profesional/texteditor/";
+
+
     private static int totalScore, curScore;
 
     private static Scanner sc;
     private static UserSolution user = new UserSolution();
 
     public static void main(String args[]) throws Exception {
-        System.setIn(new java.io.FileInputStream("/Users/wendy/Documents/3. Git/algorithm/src/profesional/texteditor/input.txt"));
+        System.setIn(new java.io.FileInputStream(dir + "input.txt"));
+
         sc = new Scanner(System.in);
 
         int T = sc.nextInt();

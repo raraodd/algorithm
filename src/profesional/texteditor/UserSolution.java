@@ -52,10 +52,40 @@ public class UserSolution {
         public void insert(int N, char[] str) {
             char tmp[] = new char[1000000];
             int i = cursorPosition;
+            int j = 0;
+            System.out.println(getString(text) + " " + i + " " + isTextSelected);
+
+            while (j < N) {
+                tmp[i] = text[i];
+                text[i] = str[j];
+                i++; j++;
+            }
+
+            System.out.println(getString(text) + " " + getString(tmp) + " " +
+                    (startSelectedText+selectedTextLength));
+            selectedTextLength = 5;
+            isTextSelected = true;
+
+            if(isTextSelected) {
+                j = 0;
+                do {
+
+                } while (tmp[j] != '\0' || text[i] != '\0');
+            } else {
+                j = 0;
+                do {
+                    tmp[i] = text[i];
+                    text[i] = tmp[j];
+                    i++; j++;
+                } while (tmp[j] != '\0');
+            }
+            System.out.println(getString(text) + " " + i + " " + j);
 
         }
 
-        public void deleteSelectedText()
+        public void deleteSelectedText(){
+
+        }
     }
 
     TextEditor te;
@@ -100,6 +130,7 @@ public class UserSolution {
     }
     
     public int insert_string(int M, char[] str) {
+        System.out.println("\n" + count + " insert_string " + M + " " + getString(str));
         te.insert(M, str);
         return te.textLength;
     }
