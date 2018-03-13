@@ -97,6 +97,9 @@ public class Solution {
                 case COPY:
                     user.copy_string();
                     break;
+                case CUT:
+                    userLen = user.cut_string();
+                    break;
                 case PASTED:
                     userLen = user.paste_string();
                     break;

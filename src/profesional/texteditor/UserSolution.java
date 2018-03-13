@@ -49,42 +49,68 @@ public class UserSolution {
             clipboardLength = selectedTextLength;
         }
 
-        public void insert(int N, char[] str) {
+        public void insert(int N, char[] str, boolean isPaste) {
             char tmp[] = new char[1000000];
-            int i = cursorPosition;
+            int i = 0;
             int j = 0;
-            System.out.println(getString(text) + " " + i + " " + isTextSelected);
+            int k = cursorPosition;
+            System.out.println(getString(text) + " " + i + " " + j + " " + k);
 
             while (j < N) {
-                tmp[i] = text[i];
-                text[i] = str[j];
-                i++; j++;
+                tmp[i] = text[k];
+                text[k] = str[j];
+                i++; j++; k++;
             }
 
-            System.out.println(getString(text) + " " + getString(tmp) + " " +
-                    (startSelectedText+selectedTextLength));
-            selectedTextLength = 5;
-            isTextSelected = true;
+            System.out.println(getString(text) + " --- " + getString(tmp) + " " + i);
 
-            if(isTextSelected) {
-                j = 0;
-                do {
-
-                } while (tmp[j] != '\0' || text[i] != '\0');
+            if(isTextSelected && !isPaste) {
+                if(selectedTextLength > N) {
+                    j = cursorPosition + selectedTextLength;
+                    while (i != j) {
+                        if(text[j] != '\0') {
+                            text[i] = text[j];
+                            j++;
+                        } else {
+                            text[i] = '\0';
+                        }
+                        i++;
+                    }
+                } else {
+                  k = selectedTextLength;
+                  do {
+                      tmp[j] = text[i];
+                      text[i] = tmp[k];
+                      i++; j++; k++;
+                  } while (tmp[k] != '\0');
+                }
+                textLength += (N - selectedTextLength);
             } else {
                 j = 0;
+                System.out.println(i + " " + j + " " + k);
                 do {
-                    tmp[i] = text[i];
-                    text[i] = tmp[j];
-                    i++; j++;
+                    tmp[i] = text[k];
+                    text[k] = tmp[j];
+                    i++; j++; k++;
                 } while (tmp[j] != '\0');
+                textLength += N;
             }
-            System.out.println(getString(text) + " " + i + " " + j);
-
+            cursorPosition += N;
+            System.out.println(getString(text) + " " + textLength + " " + cursorPosition);
         }
 
         public void deleteSelectedText(){
-
+            int i = startSelectedText;
+            int j = startSelectedText + selectedTextLength;
+            System.out.println(i + " " + j);
+            while (i != j) {
+                text[i] = text[j];
+                i++;
+                if(text[j] != '\0') j++;
+            }
+            textLength -= selectedTextLength;
+            isTextSelected = false;
+            System.out.println(getString(text) + " " + textLength + " " + cursorPosition);
         }
     }
 
@@ -115,6 +141,7 @@ public class UserSolution {
             te.cursorPosition = mLeft;
         }
         System.out.println("Selected text " + getString(te.selectedText) + " " + te.selectedTextLength + " " + te.cursorPosition);
+        System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
     }
     
     public void copy_string() {
@@ -123,21 +150,58 @@ public class UserSolution {
         if(!te.isTextSelected) return;
         te.copyClipboard();
         System.out.println("Copy text " + getString(te.clipboard) + " " + te.clipboardLength + " " + te.cursorPosition);
-    }   
-
-    public int paste_string() {
-        return 0;
+        System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
     }
-    
+
     public int insert_string(int M, char[] str) {
         System.out.println("\n" + count + " insert_string " + M + " " + getString(str));
-        te.insert(M, str);
+        count++;
+        te.insert(M, str, false);
+        System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
+        return te.textLength;
+    }
+
+    public int paste_string() {
+        System.out.println("\n" + count + " paste_string " + te.clipboard);
+        count++;
+        if(te.clipboard != null) {
+            if(te.isTextSelected) te.deleteSelectedText();
+            te.insert(te.clipboardLength, te.clipboard, true);
+        }
+        te.isTextSelected = false;
+        System.out.println("*** " + getString(te.selectedText) + " " + getString(Solution.init_str));
         return te.textLength;
     }
 
     public void get_substring(int left, int right, char[] res_str) {
-
+        System.out.println("\n" + count + " get_substring " + left + " " + right + " " + getString(te.text));
+        count++;
+        int i = 0;
+        while (i < 15) {
+            if(left <= right && te.text[left] != '\0') {
+                res_str[i] = te.text[left];
+            } else {
+                res_str[i] = '\0';
+            }
+            i++; left++;
+        }
+        System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
+        System.out.println(getString(res_str));
     }
+
+
+    public int cut_string() {
+        System.out.println("\n" + count + " cut_string " + getString(te.text));
+        count++;
+        if(te.isTextSelected) {
+            te.copyClipboard();
+            te.deleteSelectedText();
+        }
+        System.out.println(getString(te.clipboard));
+        System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
+        return te.textLength;
+    }
+
 
     public String getString(char[] c) {
         String s = "";
