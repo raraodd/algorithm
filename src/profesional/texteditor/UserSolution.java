@@ -129,9 +129,11 @@ public class UserSolution {
         count++;
         if(mLeft > te.textLength - 1) {
             te.isTextSelected = false;
-            te.cursorPosition = te.textLength - 1;
+            te.selectedText = new char[1000000];
+            te.selectedTextLength = 0;
+            te.cursorPosition = te.textLength;
         }
-        if (mRight > te.textLength - 1) {
+        else if (mRight > te.textLength - 1) {
             te.isTextSelected = true;
             te.setSelectedText(mLeft, te.textLength - 1);
             te.cursorPosition = mLeft;
@@ -157,7 +159,7 @@ public class UserSolution {
         System.out.println("\n" + count + " insert_string " + M + " " + getString(str));
         count++;
         te.insert(M, str, false);
-        System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
+        System.out.println("*** " + getString(te.text) + " " + te.textLength);
         return te.textLength;
     }
 
@@ -169,7 +171,7 @@ public class UserSolution {
             te.insert(te.clipboardLength, te.clipboard, true);
         }
         te.isTextSelected = false;
-        System.out.println("*** " + getString(te.selectedText) + " " + getString(Solution.init_str));
+        System.out.println("*** " + getString(te.text) + " " + te.textLength);
         return te.textLength;
     }
 
@@ -197,7 +199,6 @@ public class UserSolution {
             te.copyClipboard();
             te.deleteSelectedText();
         }
-        System.out.println(getString(te.clipboard));
         System.out.println("*** " + getString(te.text) + " " + getString(Solution.init_str));
         return te.textLength;
     }
