@@ -340,6 +340,8 @@ public class UserSolution {
         result.count = length;
         result.str = value.toCharArray();
 
+        System.out.println(result.count + " " + value);
+
         return result;
     }
 

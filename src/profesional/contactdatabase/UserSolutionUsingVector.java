@@ -1,8 +1,10 @@
 package profesional.contactdatabase;
 
+import util.RedBlackTree;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import util.Vect;
+//import util.HashMap;
 
 /**
  * Created by Wendy P on 5/17/17.
@@ -10,10 +12,10 @@ import util.Vect;
 
 public class UserSolutionUsingVector {
 
-    public static HashMap<Integer, Record> database;
-    public static HashMap<String, Vect<Integer>> mapName, mapBirthday, mapMemo, mapNumber, mapEmail;
+    public static RedBlackTree<Record> database;
+    public static HashMap<String, ArrayList<Integer>> mapName, mapBirthday, mapMemo, mapNumber, mapEmail;
 
-    public static Integer count = 0;
+    public static int count;
 
     public static class Field {
         final public static int name = 0;
@@ -24,12 +26,11 @@ public class UserSolutionUsingVector {
     }
 
     static class Record {
-        public int id;
         public String name, number, birthday, email, memo;
 
         @Override
         public String toString() {
-            return id+" "+name+" "+number+" "+birthday+" "+email+" "+memo;
+            return name+" "+number+" "+birthday+" "+email+" "+memo;
         }
 
         public String getValue(int fieldName){
@@ -66,6 +67,17 @@ public class UserSolutionUsingVector {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static void printArr(char[] data) {
+        int i = 0;
+        while (i < data.length && data[i]!='\0'){
+            System.out.print(data[i]);
+            i++;
+        }
+        System.out.print(" ");
+    }
+
+
     public static String subArray(char[] chr) {
         String result = "";
         int len = chr.length;
@@ -74,61 +86,62 @@ public class UserSolutionUsingVector {
             result += chr[i];
 
         }
+//        System.out.println("Subarray " + result + " " + result.length());
         return result;
     }
 
     public static void addValueToMap(int field, Record record, int index) {
-        Vect<Integer> listDatabaseIndex;
+        ArrayList<Integer> listDatabaseIndex;
         switch (field){
             case Field.name:
                 if(mapName.get(record.name) == null) {
-                    listDatabaseIndex = new Vect<>();
-                    listDatabaseIndex.addElement(index);
+                    listDatabaseIndex = new ArrayList<>();
+                    listDatabaseIndex.add(index);
                     mapName.put(record.name, listDatabaseIndex);
                 } else {
-                    mapName.get(record.name).addElement(index);
+                    mapName.get(record.name).add(index);
                 }
                 return;
             case Field.number:
                 if(mapNumber.get(record.number) == null) {
-                    listDatabaseIndex = new Vect<>();
-                    listDatabaseIndex.addElement(index);
+                    listDatabaseIndex = new ArrayList<>();
+                    listDatabaseIndex.add(index);
                     mapNumber.put(record.number, listDatabaseIndex);
                 } else {
-                    mapNumber.get(record.number).addElement(index);
+                    mapNumber.get(record.number).add(index);
                 }
                 return;
             case Field.birthday:
                 if(mapBirthday.get(record.birthday) == null) {
-                    listDatabaseIndex = new Vect<>();
-                    listDatabaseIndex.addElement(index);
+                    listDatabaseIndex = new ArrayList<>();
+                    listDatabaseIndex.add(index);
                     mapBirthday.put(record.birthday, listDatabaseIndex);
                 } else {
-                    mapBirthday.get(record.birthday).addElement(index);
+                    mapBirthday.get(record.birthday).add(index);
                 }
                 return;
             case Field.email:
                 if(mapEmail.get(record.email) == null) {
-                    listDatabaseIndex = new Vect<>();
-                    listDatabaseIndex.addElement(index);
+                    listDatabaseIndex = new ArrayList<>();
+                    listDatabaseIndex.add(index);
                     mapEmail.put(record.email, listDatabaseIndex);
                 } else {
-                    mapEmail.get(record.email).addElement(index);
+                    mapEmail.get(record.email).add(index);
                 }
                 return;
             case Field.memo:
                 if(mapMemo.get(record.memo) == null) {
-                    listDatabaseIndex = new Vect<>();
-                    listDatabaseIndex.addElement(index);
+                    listDatabaseIndex = new ArrayList<>();
+                    listDatabaseIndex.add(index);
                     mapMemo.put(record.memo, listDatabaseIndex);
                 } else {
-                    mapMemo.get(record.memo).addElement(index);
+                    mapMemo.get(record.memo).add(index);
                 }
                 return;
         }
     }
 
-    public static Vect<Integer> getListDatabaseIndex(int field, String key) {
+    public static ArrayList<Integer> getListDatabaseIndex(int field, String key) {
         switch (field) {
             case Field.name:
                 return mapName.get(key);
@@ -145,15 +158,15 @@ public class UserSolutionUsingVector {
     }
 
     public static void removeIndexFromMap(int field, Record record, int index) {
-        Vect<Integer> listDatabaseIndex;
+        ArrayList<Integer> listDatabaseIndex;
         int length;
         switch (field) {
             case Field.name :
                 listDatabaseIndex = mapName.get(record.name);
                 length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
                 for(int i=0; i < length; i++) {
-                    if(listDatabaseIndex.elementAt(i) == index) {
-                        mapName.get(record.name).removeElement(i);
+                    if(listDatabaseIndex.get(i) == index) {
+                        mapName.get(record.name).remove(i);
                         break;
                     }
                 }
@@ -162,8 +175,8 @@ public class UserSolutionUsingVector {
                 listDatabaseIndex = mapBirthday.get(record.birthday);
                 length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
                 for(int i=0; i < length; i++) {
-                    if(listDatabaseIndex.elementAt(i) == index) {
-                        mapBirthday.get(record.birthday).removeElement(i);
+                    if(listDatabaseIndex.get(i) == index) {
+                        mapBirthday.get(record.birthday).remove(i);
                         break;
                     }
                 }
@@ -172,8 +185,8 @@ public class UserSolutionUsingVector {
                 listDatabaseIndex = mapMemo.get(record.memo);
                 length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
                 for(int i=0; i < length; i++) {
-                    if(listDatabaseIndex.elementAt(i) == index) {
-                        mapMemo.get(record.memo).removeElement(i);
+                    if(listDatabaseIndex.get(i) == index) {
+                        mapMemo.get(record.memo).remove(i);
                         break;
                     }
                 }
@@ -182,8 +195,8 @@ public class UserSolutionUsingVector {
                 listDatabaseIndex = mapEmail.get(record.email);
                 length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
                 for(int i=0; i < length; i++) {
-                    if(listDatabaseIndex.elementAt(i) == index) {
-                        mapEmail.get(record.email).removeElement(i);
+                    if(listDatabaseIndex.get(i) == index) {
+                        mapEmail.get(record.email).remove(i);
                         break;
                     }
                 }
@@ -192,8 +205,8 @@ public class UserSolutionUsingVector {
                 listDatabaseIndex = mapNumber.get(record.number);
                 length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
                 for(int i=0; i < length; i++) {
-                    if(listDatabaseIndex.elementAt(i) == index) {
-                        mapNumber.get(record.number).removeElement(i);
+                    if(listDatabaseIndex.get(i) == index) {
+                        mapNumber.get(record.number).remove(i);
                         break;
                     }
                 }
@@ -223,8 +236,10 @@ public class UserSolutionUsingVector {
 
 
     public static void InitDB() {
+        System.out.println("0 Init");
+
         // init database arrayList
-        database = new HashMap<>();
+        database = new RedBlackTree<>();
 
         // init map name, birthday, memo, number, email
         mapName = new HashMap<>();
@@ -233,27 +248,28 @@ public class UserSolutionUsingVector {
         mapNumber = new HashMap<>();
         mapEmail = new HashMap<>();
 
+        count = 1;
+
         return;
     }
 
     public static void Add(char[] name2, char[] number2, char[] birthday2, char[] email2, char[] memo2) {
         // create database record
         Record record = new Record();
-        record.id = count+1;
         record.name = subArray(name2);
         record.number = subArray(number2);
         record.birthday = subArray(birthday2);
         record.email = subArray(email2);
         record.memo = subArray(memo2);
-        count++;
 
-//        System.out.println("1 Add " + record.toString());
+        System.out.println("1 Add " + record.toString());
 
         // save record to database
-        database.put(record.id, record);
+        database.insert(count, record);
+        count++;
 
         // save key to all map
-        int index = record.id;
+        int index = count;
         addValueToMap(Field.name, record, index);
         addValueToMap(Field.birthday, record, index);
         addValueToMap(Field.memo, record, index);
@@ -262,13 +278,13 @@ public class UserSolutionUsingVector {
     }
 
     public static int Delete(int field, char[] str) {
-//        System.out.println("2 Delete "+ field + " " + new String(str).toString());
+        System.out.println("2 Delete "+ field + " " + new String(str).toString());
 
-        Vect<Integer> listDatabaseIndex = getListDatabaseIndex(field, new String(str));
+        ArrayList<Integer> listDatabaseIndex = getListDatabaseIndex(field, new String(str));
 
         int length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
         for(int i=0; i < length; i++) {
-            int index = listDatabaseIndex.elementAt(i); // index in database
+            int index = listDatabaseIndex.get(i); // index in database
             Record record = database.get(index);
 
             // remove all index in map record
@@ -281,23 +297,23 @@ public class UserSolutionUsingVector {
         return length;
     }
 
-    public static int[] copyIndex(Vect<Integer> listDatabaseIndex) {
+    public static int[] copyIndex(ArrayList<Integer> listDatabaseIndex) {
         if(listDatabaseIndex == null || listDatabaseIndex.size() == 0) return null;
         int[] result = new int[listDatabaseIndex.size()];
         for(int i=0; i<listDatabaseIndex.size(); i++) {
-            result[i] = listDatabaseIndex.elementAt(i);
+            result[i] = listDatabaseIndex.get(i);
         }
         return result;
     }
 
     public static int Change(int field, char[] str, int changefield, char[] changestr) {
-//        System.out.println("3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
+        System.out.println("3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
 
         String key = new String(str);
         String newValue = new String(changestr);
 
-        Vect<Integer> listIdx = getListDatabaseIndex(field, key);
-        // di copy dulu indexnya, somehow kalo pake Vect kalo di remove ikut ke remove juga
+        ArrayList<Integer> listIdx = getListDatabaseIndex(field, key);
+        // di copy dulu indexnya, somehow kalo pake arraylist kalo di remove ikut ke remove juga
         int[] idxList = copyIndex(listIdx);
 
         int length = idxList == null ? 0 : idxList.length;
@@ -320,16 +336,23 @@ public class UserSolutionUsingVector {
     }
 
     public static Solution.RESULT Search(int field, char[] str, int returnfield) {
-//        System.out.println("4 Search "+ field + " " + new String(str).toString() + " " + returnfield);
+        System.out.println("4 Search "+ field + " " + new String(str).toString() + " " + returnfield);
         String key = new String(str);
-        Vect<Integer> listDatabaseIndex = getListDatabaseIndex(field, key);
+        ArrayList<Integer> listDatabaseIndex = getListDatabaseIndex(field, key);
 
         int length = listDatabaseIndex == null ? 0 : listDatabaseIndex.size();
-        String value = length == 1 ? database.get(listDatabaseIndex.elementAt(0)).getValue(returnfield) : "null";
+        String value = "null";
+
+        if(listDatabaseIndex != null) {
+            Record record = database.get(listDatabaseIndex.get(0));
+            if(record != null) value = record.getValue(returnfield);
+        }
 
         Solution.RESULT result = new Solution.RESULT();
         result.count = length;
         result.str = value.toCharArray();
+
+        System.out.println(result.count + " " + value);
 
         return result;
     }

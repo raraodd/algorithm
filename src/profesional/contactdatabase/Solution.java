@@ -1,5 +1,6 @@
 package profesional.contactdatabase;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,7 @@ public class Solution {
     private static final int CMD_CHANGE = 3;
     private static final int CMD_SEARCH = 4;
 
-    static Scanner sc = new Scanner(System.in);
+    static Scanner sc;
 
     static int [] dummy = new int[100];
     static int Score, ScoreIdx;
@@ -25,6 +26,8 @@ public class Solution {
 
 //    static UserSolution userSolution = new UserSolution();
     static UserSolutionUsingVector userSolution = new UserSolutionUsingVector();
+
+    static final String dir = System.getProperty("user.dir") + "/src/profesional/texteditor/";
 
     public static class RESULT
     {
@@ -196,11 +199,12 @@ public class Solution {
         ScoreIdx = 1;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws FileNotFoundException {
 
-        int T;
-        T = sc.nextInt();
+//        System.setIn(new java.io.FileInputStream(dir + "input.txt"));
+        sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
 
         int TotalScore = 0;
         for (int tc = 1; tc <= T; tc++)
