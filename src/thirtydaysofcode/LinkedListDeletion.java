@@ -22,7 +22,7 @@ public class LinkedListDeletion {
         return head;
     }
 
-    public static  Node insert(Node head,int data)
+    public static Node insert(Node head,int data)
     {
         Node p= new Node(data);
         if(head==null)
@@ -48,6 +48,7 @@ public class LinkedListDeletion {
             start=start.next;
         }
     }
+
     public static void main(String args[])
     {
         Scanner sc=new Scanner(System.in);
