@@ -174,10 +174,6 @@ public class Solution {
         N = sc.nextInt();
         for (int i = 0; i < N; i++)
         {
-//            if(i == 42) break;
-//            if(i == 42) {
-//                System.out.println();
-//            }
             int cmd;
             cmd = sc.nextInt();
             switch (cmd)

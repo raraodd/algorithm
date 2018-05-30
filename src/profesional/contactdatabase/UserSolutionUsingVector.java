@@ -262,10 +262,11 @@ public class UserSolutionUsingVector {
         record.email = subArray(email2);
         record.memo = subArray(memo2);
 
-        System.out.println("1 Add " + record.toString());
+//        System.out.println("1 Add " + record.toString());
 
         // save record to database
         database.insert(count, record);
+        System.out.println(count + " " + record.toString());
         count++;
 
         // save key to all map
@@ -278,7 +279,7 @@ public class UserSolutionUsingVector {
     }
 
     public static int Delete(int field, char[] str) {
-        System.out.println("2 Delete "+ field + " " + new String(str).toString());
+        System.out.println("\n2 Delete "+ field + " " + new String(str).toString());
 
         ArrayList<Integer> listDatabaseIndex = getListDatabaseIndex(field, new String(str));
 
@@ -307,7 +308,7 @@ public class UserSolutionUsingVector {
     }
 
     public static int Change(int field, char[] str, int changefield, char[] changestr) {
-        System.out.println("3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
+        System.out.println("\n3 Change "+ field + " " + new String(str).toString() + " " + changefield + " " + new String(changestr).toString() + " ");
 
         String key = new String(str);
         String newValue = new String(changestr);
@@ -336,7 +337,7 @@ public class UserSolutionUsingVector {
     }
 
     public static Solution.RESULT Search(int field, char[] str, int returnfield) {
-        System.out.println("4 Search "+ field + " " + new String(str).toString() + " " + returnfield);
+        System.out.println("\n4 Search "+ field + " " + new String(str).toString() + " " + returnfield);
         String key = new String(str);
         ArrayList<Integer> listDatabaseIndex = getListDatabaseIndex(field, key);
 

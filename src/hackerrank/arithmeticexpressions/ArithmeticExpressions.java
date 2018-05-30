@@ -10,8 +10,9 @@ public class ArithmeticExpressions {
     private static final int SUBTRACTION = 3;
     static String finalExpression = "";
 
-    static int doArithmetic(int[] arr, int pos, int expression, int result) {
-        int res;
+    static long doArithmetic(long[] arr, int pos, int expression, long result) {
+        System.out.println(arr.length + " " + expression + " " + pos + " " + result);
+        long res;
         if(pos == arr.length) return result;
 
         switch (expression) {
@@ -26,26 +27,26 @@ public class ArithmeticExpressions {
                 break;
         }
 
-        res = doArithmetic(arr, pos+1, 1, result);
-        if(res != -99999999 && res % 101 == 0) {
-            System.out.println(pos + " " + res + " " + res % 101);
-            finalExpression = String.valueOf(getExpression(expression) + arr[pos]) + finalExpression;
-            return res;
-        }
-
         res = doArithmetic(arr, pos+1, 2, result);
         if(res != -99999999 && res % 101 == 0) {
-            System.out.println(pos + " " + res + " " + res % 101);
+            System.out.println(pos + " " + expression + " " + res + " " + res % 101);
             finalExpression = getExpression(expression) + String.valueOf(arr[pos]) + finalExpression;
             return res;
         }
 
         res = doArithmetic(arr, pos+1, 3, result);
         if(res != -99999999 && res % 101 == 0) {
-            System.out.println(pos + " " + res + " " + res % 101);
+            System.out.println(pos + " " + expression + " " + res + " " + res % 101);
             finalExpression = getExpression(expression) + String.valueOf(arr[pos]) + finalExpression;
             return res;
         }
+
+//        res = doArithmetic(arr, pos+1, 1, result);
+//        if(res != -99999999 && res % 101 == 0) {
+//            System.out.println(pos + " " + expression + " " + res + " " + res % 101);
+//            finalExpression = getExpression(expression) + String.valueOf(arr[pos]) + finalExpression;
+//            return res;
+//        }
 
         return -99999999;
     }
@@ -60,26 +61,27 @@ public class ArithmeticExpressions {
     }
 
     // Complete the arithmeticExpressions function below.
-    static String arithmeticExpressions(int[] arr) {
-        for(int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        doArithmetic(arr, 1, 1, arr[0]);
-        if(!finalExpression.equals("")) return finalExpression = arr[0] + finalExpression;
-        doArithmetic(arr, 1, 2, arr[0]);
-        if(!finalExpression.equals("")) return finalExpression = arr[0] + finalExpression;
-        doArithmetic(arr, 1, 3, arr[0]);
+    static String arithmeticExpressions(long[] arr) {
+        long res;
+        res = doArithmetic(arr, 1, 2, arr[0]);
+        System.out.println("1 " + res + " " + res%101);
+        if(!finalExpression.equals("") && res % 101 == 0) return finalExpression = arr[0] + finalExpression;
+        res = doArithmetic(arr, 1, 3, arr[0]);
+        System.out.println("2 " + res);
+        if(!finalExpression.equals("") && res % 101 == 0) return finalExpression = arr[0] + finalExpression;
+        res = doArithmetic(arr, 1, 1, arr[0]);
+        System.out.println("3 " + res);
         return finalExpression = arr[0] + finalExpression;
     }
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new java.io.FileInputStream("/Users/wendy/Documents/3. Git/algorithm/src/hackerrank/arithmeticexpressions/input00.txt"));
+        System.setIn(new java.io.FileInputStream("/Users/wendyp/Documents/9_Project/Algorithms/src/hackerrank/arithmeticexpressions/input16.txt"));
         Scanner scanner = new Scanner(System.in);
 
         int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int[] arr = new int[n];
+        long[] arr = new long[n];
 
         String[] arrItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
