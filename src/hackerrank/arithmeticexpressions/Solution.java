@@ -9,6 +9,7 @@ import java.util.List;
 public class Solution {
 
     private static boolean solve(boolean [][] dp, long sumSoFar, int currentElement, long [] elements, List<Character> elementsUsed) {
+        System.out.println(currentElement + " " + " " + sumSoFar + " " +  sumSoFar%101L);
         long modVal = 101L;
         sumSoFar %= modVal;
 
@@ -27,11 +28,16 @@ public class Solution {
 
         long moddedElement = (elements[currentElement]) % modVal;
 
+        System.out.println("> " + elements[currentElement] + " " + moddedElement);
+        System.out.println(">> + " + (sumSoFar + moddedElement) % modVal);
+
         elementsUsed.add('+');
         if (solve(dp, (sumSoFar + moddedElement) % modVal, currentElement + 1, elements, elementsUsed)) {
             return true;
         }
         elementsUsed.remove(elementsUsed.size() - 1);
+
+        System.out.println("\n>> - " + (sumSoFar - moddedElement) % modVal);
 
         elementsUsed.add('-');
         if (solve (dp, (sumSoFar - moddedElement) % modVal, currentElement + 1, elements, elementsUsed)) {
@@ -39,19 +45,22 @@ public class Solution {
         }
         elementsUsed.remove(elementsUsed.size() - 1);
 
+        System.out.println("\n>> * " + (sumSoFar * moddedElement) % modVal);
+
         elementsUsed.add('*');
         if (solve(dp, (sumSoFar * moddedElement) % modVal, currentElement + 1, elements, elementsUsed)) {
             return true;
         }
         elementsUsed.remove(elementsUsed.size() - 1);
 
+        System.out.println("dp " + ((int)sumSoFar + 101) + " " + currentElement);
         dp[(int)sumSoFar + 101][currentElement] = true;
 
         return false;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        System.setIn(new java.io.FileInputStream("/Users/wendyp/Documents/9_Project/Algorithms/src/hackerrank/arithmeticexpressions/input25.txt"));
+        System.setIn(new java.io.FileInputStream("/Users/wendyp/Documents/9_Project/Algorithms/src/hackerrank/arithmeticexpressions/input01.txt"));
 
         Scanner scn = new Scanner(System.in);
 
@@ -60,7 +69,10 @@ public class Solution {
 
         for (int i = 0; i < numberOfElements; i++) {
             elements[i] = scn.nextLong();
+            System.out.print(elements[i] + " ");
         }
+
+        System.out.println();
 
         List<Character> elementsUsed = new ArrayList<>();
         boolean [][] dp = new boolean[202][numberOfElements];
