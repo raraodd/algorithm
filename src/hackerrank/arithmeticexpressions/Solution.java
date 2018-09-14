@@ -60,7 +60,7 @@ public class Solution {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        System.setIn(new java.io.FileInputStream("/Users/wendyp/Documents/9_Project/Algorithms/src/hackerrank/arithmeticexpressions/input01.txt"));
+        System.setIn(new java.io.FileInputStream("/Users/wendy/Documents/3. Git/algorithm/src/hackerrank/arithmeticexpressions/input00.txt"));
 
         Scanner scn = new Scanner(System.in);
 
