@@ -49,7 +49,7 @@ public class HashTable {
     public static void replace(String key, int value) {
         int hash_key = hash(key);
         LL list = table[hash_key];
-        list.insertNode(value);
+//        list.insertNode(value);
         table[hash_key] = list;
     }
 
@@ -57,7 +57,7 @@ public class HashTable {
     public static int get(String key) {
         LL list = table[hash(key)];
 
-        return ;
+        return 0;
     }
 
     public static void main(String args[])
